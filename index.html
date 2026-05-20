@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrawnExpress – Fresh Prawns Delivered Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #D85A30;
+    --coral-dark: #993C1D;
+    --coral-light: #FAECE7;
+    --coral-mid: #F0997B;
+    --amber: #EF9F27;
+    --amber-light: #FAEEDA;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --gray-bg: #FAF8F5;
+    --gray-dark: #2C2C2A;
+    --gray-mid: #5F5E5A;
+    --white: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--gray-bg); color: var(--gray-dark); }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid #EDE9E0;
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px; position: sticky; top: 0; z-index: 100;
+  }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--coral); letter-spacing: -0.5px; }
+  .logo span { color: var(--gray-dark); }
+  nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+  nav ul a { text-decoration: none; color: var(--gray-mid); font-size: 0.9rem; font-weight: 400; transition: color 0.2s; }
+  nav ul a:hover { color: var(--coral); }
+  .nav-cta {
+    background: var(--coral); color: #fff; padding: 0.5rem 1.3rem;
+    border-radius: 24px; font-size: 0.88rem; font-weight: 500;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--coral-dark); color: #fff; }
+
+  /* HERO */
+  .hero {
+    background: var(--gray-dark);
+    padding: 5% 5% 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: end; overflow: hidden;
+    min-height: 520px;
+  }
+  .hero-text { padding-bottom: 4rem; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--coral-light); color: var(--coral-dark);
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 0.35rem 1rem;
+    border-radius: 20px; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.4rem; font-weight: 900; line-height: 1.08;
+    color: #fff; margin-bottom: 1.2rem; letter-spacing: -1px;
+  }
+  .hero h1 em { color: var(--coral-mid); font-style: normal; }
+  .hero p { color: #B4B2A9; font-size: 1rem; line-height: 1.7; max-width: 400px; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--coral); color: #fff;
+    padding: 0.85rem 2rem; border-radius: 30px;
+    font-size: 0.95rem; font-weight: 500;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--coral-dark); transform: translateY(-1px); }
+  .btn-ghost {
+    color: #fff; font-size: 0.9rem;
+    text-decoration: none; font-weight: 400;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .btn-ghost:hover { color: var(--coral-mid); }
+  .hero-img {
+    display: flex; align-items: flex-end; justify-content: center;
+    font-size: 11rem; line-height: 1; filter: drop-shadow(0 -20px 40px rgba(216,90,48,0.3));
+    padding-bottom: 0;
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--coral);
+    display: flex; justify-content: space-around; align-items: center;
+    padding: 1.2rem 5%; flex-wrap: wrap; gap: 1rem;
+  }
+  .trust-item { display: flex; align-items: center; gap: 0.6rem; color: #fff; }
+  .trust-item .icon { font-size: 1.3rem; }
+  .trust-item strong { font-size: 0.88rem; font-weight: 500; }
+
+  /* SECTION STYLES */
+  section { padding: 5rem 5%; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--coral);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; line-height: 1.2;
+    letter-spacing: -0.5px; margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--gray-mid); font-size: 0.95rem; line-height: 1.7; max-width: 480px; }
+
+  /* MENU SECTION */
+  .menu-section { background: var(--white); }
+  .menu-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+  .menu-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid #EDE9E0;
+    background: transparent; color: var(--gray-mid); font-size: 0.83rem;
+    cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--coral); color: #fff; border-color: var(--coral);
+  }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+  .menu-card {
+    border: 1px solid #EDE9E0; border-radius: 16px; overflow: hidden;
+    background: var(--gray-bg); transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .menu-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
+  .card-img {
+    background: linear-gradient(135deg, var(--coral-light) 0%, var(--amber-light) 100%);
+    height: 160px; display: flex; align-items: center; justify-content: center;
+    font-size: 4.5rem; position: relative;
+  }
+  .card-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--amber); color: #633806;
+    font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+  }
+  .card-body { padding: 1.2rem; }
+  .card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .card-body p { font-size: 0.83rem; color: var(--gray-mid); line-height: 1.5; margin-bottom: 1rem; }
+  .card-footer { display: flex; justify-content: space-between; align-items: center; }
+  .price { font-size: 1.15rem; font-weight: 500; color: var(--coral); }
+  .price span { font-size: 0.78rem; color: var(--gray-mid); font-weight: 400; }
+  .add-btn {
+    background: var(--coral); color: #fff;
+    width: 34px; height: 34px; border-radius: 50%;
+    border: none; cursor: pointer; font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .add-btn:hover { background: var(--coral-dark); }
+
+  /* HOW IT WORKS */
+  .how-section { background: var(--gray-bg); }
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .step {
+    text-align: center; padding: 2rem 1.5rem;
+    background: var(--white); border-radius: 16px;
+    border: 1px solid #EDE9E0;
+  }
+  .step-num {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: var(--coral-light); color: var(--coral);
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+  }
+  .step-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+  .step h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.85rem; color: var(--gray-mid); line-height: 1.6; }
+
+  /* FRESHNESS */
+  .fresh-section {
+    background: var(--gray-dark);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .fresh-visual {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem; background: #3C3434; border-radius: 20px;
+    padding: 3rem; min-height: 320px;
+    filter: drop-shadow(0 0 40px rgba(216,90,48,0.2));
+  }
+  .fresh-text .section-title { color: #fff; }
+  .fresh-text .section-sub { color: #B4B2A9; }
+  .fresh-points { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .fresh-points li {
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    color: #D3D1C7; font-size: 0.9rem; line-height: 1.6;
+  }
+  .fresh-points li .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--coral); flex-shrink: 0; margin-top: 6px;
+  }
+
+  /* TESTIMONIALS */
+  .reviews-section { background: var(--coral-light); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .review-card {
+    background: var(--white); border-radius: 16px;
+    padding: 1.5rem; border: 1px solid #F5C4B3;
+  }
+  .stars { color: var(--amber); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .review-text { font-size: 0.9rem; line-height: 1.7; color: var(--gray-dark); margin-bottom: 1.2rem; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 0.8rem; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--coral-light); color: var(--coral-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 600;
+  }
+  .reviewer-info strong { font-size: 0.88rem; display: block; }
+  .reviewer-info span { font-size: 0.78rem; color: var(--gray-mid); }
+
+  /* ORDER FORM */
+  .order-section { background: var(--white); }
+  .order-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; font-size: 0.83rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--gray-mid); }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1px solid #EDE9E0; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    color: var(--gray-dark); background: var(--gray-bg);
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--coral);
+  }
+  .order-summary {
+    background: var(--gray-bg); border-radius: 16px;
+    padding: 2rem; border: 1px solid #EDE9E0; position: sticky; top: 90px;
+  }
+  .order-summary h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1.5rem; }
+  .summary-item { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid #EDE9E0; font-size: 0.88rem; }
+  .summary-total { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0 0; font-weight: 600; font-size: 1.05rem; }
+  .free-delivery { color: var(--teal); font-size: 0.8rem; font-weight: 500; }
+  .submit-btn {
+    width: 100%; padding: 0.9rem;
+    background: var(--coral); color: #fff; border: none;
+    border-radius: 30px; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 500; cursor: pointer;
+    margin-top: 1.2rem; transition: background 0.2s;
+  }
+  .submit-btn:hover { background: var(--coral-dark); }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray-dark); color: #888780;
+    padding: 3rem 5% 2rem;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+  .footer-brand .logo { color: var(--coral-mid); font-size: 1.4rem; }
+  .footer-brand p { margin-top: 0.8rem; font-size: 0.85rem; line-height: 1.7; max-width: 260px; }
+  footer h4 { color: #fff; font-size: 0.88rem; font-weight: 500; margin-bottom: 1rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  footer ul a { color: #888780; text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+  footer ul a:hover { color: var(--coral-mid); }
+  .footer-bottom {
+    background: var(--gray-dark); padding: 1rem 5%; border-top: 1px solid #3C3434;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; color: #5F5E5A;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: var(--gray-dark); color: #fff;
+    padding: 0.8rem 1.5rem; border-radius: 30px;
+    font-size: 0.88rem; opacity: 0; pointer-events: none;
+    transform: translateY(10px); transition: all 0.3s;
+    z-index: 999;
+  }
+  .toast.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-img { font-size: 6rem; padding: 2rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .fresh-section { grid-template-columns: 1fr; }
+    .order-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr 1fr; }
+    nav ul { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Prawn<span>Express</span></div>
+  <ul>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#order" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-badge">🦐 Same-day delivery available</span>
+    <h1>The <em>Freshest</em> Prawns, Right at Your Door</h1>
+    <p>Straight from the harbour to your kitchen. Live, chilled & cleaned prawns delivered within hours of catch — no middlemen, no compromise.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">Browse Menu</a>
+      <a href="#how" class="btn-ghost">How it works →</a>
+    </div>
+  </div>
+  <div class="hero-img">🦐</div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="icon">🌊</span><strong>Caught daily from local waters</strong></div>
+  <div class="trust-item"><span class="icon">❄️</span><strong>Ice-packed for freshness</strong></div>
+  <div class="trust-item"><span class="icon">🚴</span><strong>Delivery in 90 minutes</strong></div>
+  <div class="trust-item"><span class="icon">⭐</span><strong>4.9 / 5 from 1,200+ customers</strong></div>
+</div>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div>
+      <p class="section-label">Our Selection</p>
+      <h2 class="section-title">Choose Your Prawns</h2>
+    </div>
+    <div class="menu-filters">
+      <button class="filter-btn active" onclick="filterMenu(this,'all')">All</button>
+      <button class="filter-btn" onclick="filterMenu(this,'raw')">Raw</button>
+      <button class="filter-btn" onclick="filterMenu(this,'cooked')">Cooked</button>
+      <button class="filter-btn" onclick="filterMenu(this,'cleaned')">Pre-cleaned</button>
+    </div>
+  </div>
+  <div class="menu-grid" id="menuGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div style="text-align:center; max-width: 500px; margin: 0 auto;">
+    <p class="section-label">Simple Process</p>
+    <h2 class="section-title">From Sea to Your Plate in 4 Steps</h2>
+  </div>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-icon">🛒</div>
+      <h3>Pick your prawns</h3>
+      <p>Choose from our fresh daily selection — live, raw, cooked, or pre-cleaned varieties.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-icon">📍</div>
+      <h3>Enter your address</h3>
+      <p>Tell us where you are. We deliver across the city with real-time tracking.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-icon">❄️</div>
+      <h3>We pack fresh</h3>
+      <p>Your order is packed in ice-lined boxes to maintain 0–4°C from our store to your door.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-icon">🏠</div>
+      <h3>Delivered to you</h3>
+      <p>Your delivery arrives within 90 minutes. Cook fresh or refrigerate for up to 24 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FRESHNESS GUARANTEE -->
+<section class="fresh-section">
+  <div class="fresh-visual">🦐</div>
+  <div class="fresh-text">
+    <p class="section-label" style="color: var(--coral-mid);">Our Promise</p>
+    <h2 class="section-title">Freshness is not a feature — it's our foundation</h2>
+    <p class="section-sub">We source directly from local fishing boats every morning. If it isn't fresh, we don't sell it.</p>
+    <ul class="fresh-points">
+      <li><span class="dot"></span> Sourced from local fishermen daily at 4am</li>
+      <li><span class="dot"></span> No frozen stock — ever. Every prawn is live or fresh-chilled</li>
+      <li><span class="dot"></span> Zero preservatives or additives</li>
+      <li><span class="dot"></span> 100% refund if you're not satisfied</li>
+    </ul>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div>
+    <p class="section-label">Happy Customers</p>
+    <h2 class="section-title">What people are saying</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Absolutely the freshest prawns I've had outside of a fish market. Arrived in 70 minutes perfectly chilled. Will never buy from a supermarket again!"</p>
+      <div class="reviewer">
+        <div class="avatar">PK</div>
+        <div class="reviewer-info"><strong>Priya Krishnamurthy</strong><span>Regular customer, Chennai</span></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"The tiger prawns were enormous and incredibly fresh. Cleaned and deveined too — saved me so much time. Delivery guy was polite and on time."</p>
+      <div class="reviewer">
+        <div class="avatar">RM</div>
+        <div class="reviewer-info"><strong>Rajan Murthy</strong><span>Chef & home cook, Hyderabad</span></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">"Ordered the 1kg jumbo prawns for a family dinner. Everyone was impressed! Packaging was excellent, not a drop of water. Slightly pricey but worth it."</p>
+      <div class="reviewer">
+        <div class="avatar">SN</div>
+        <div class="reviewer-info"><strong>Sunitha Nair</strong><span>Foodie, Bangalore</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section class="order-section" id="order">
+  <p class="section-label">Place Your Order</p>
+  <h2 class="section-title">Get Prawns Delivered Today</h2>
+  <div class="order-grid">
+    <form onsubmit="placeOrder(event)">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="e.g. Priya Sharma" required>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 98765 43210" required>
+      </div>
+      <div class="form-group">
+        <label>Delivery Address</label>
+        <textarea rows="3" placeholder="House/flat no, street, landmark..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Prawn Type</label>
+        <select>
+          <option>Tiger Prawns – Raw (₹499/500g)</option>
+          <option>Jumbo Prawns – Raw (₹649/500g)</option>
+          <option>Flower Prawns – Cleaned (₹399/500g)</option>
+          <option>King Prawns – Cooked (₹799/500g)</option>
+          <option>Small Prawns – Raw (₹249/500g)</option>
+          <option>Mixed Pack – Variety (₹549/1kg)</option>
+        </select>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label>Quantity</label>
+          <select>
+            <option>500g</option>
+            <option>1kg</option>
+            <option>1.5kg</option>
+            <option>2kg</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Delivery Time</label>
+          <select>
+            <option>As soon as possible</option>
+            <option>Morning (8–12)</option>
+            <option>Afternoon (12–5)</option>
+            <option>Evening (5–8)</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">🦐 Place Order — Pay on Delivery</button>
+    </form>
+
+    <div class="order-summary">
+      <h3>Order Summary</h3>
+      <div class="summary-item">
+        <span>Tiger Prawns – 500g</span>
+        <span>₹499</span>
+      </div>
+      <div class="summary-item">
+        <span>Cleaning & packing</span>
+        <span style="color: var(--teal)">Free</span>
+      </div>
+      <div class="summary-item">
+        <span>Delivery</span>
+        <span id="deliveryFee">₹49</span>
+      </div>
+      <div class="summary-total">
+        <span>Total</span>
+        <span>₹548</span>
+      </div>
+      <p class="free-delivery" style="margin-top:0.8rem; font-size:0.82rem;">✓ Free delivery on orders above ₹700</p>
+      <div style="margin-top:1.5rem; background: var(--teal-light); border-radius:10px; padding:1rem;">
+        <p style="font-size:0.82rem; color: var(--teal); font-weight:500; margin-bottom:0.3rem;">🕐 Estimated delivery</p>
+        <p style="font-size:0.88rem; color:#085041; line-height:1.5;">Within <strong>60–90 minutes</strong> of order confirmation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo">Prawn<span style="color:#D3D1C7">Express</span></div>
+    <p>Fresh seafood from local waters to your kitchen. Sourced daily, delivered fast.</p>
+  </div>
+  <div>
+    <h4>Menu</h4>
+    <ul>
+      <li><a href="#">Tiger Prawns</a></li>
+      <li><a href="#">Jumbo Prawns</a></li>
+      <li><a href="#">Flower Prawns</a></li>
+      <li><a href="#">King Prawns</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Info</h4>
+    <ul>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Our Suppliers</a></li>
+      <li><a href="#">Quality Promise</a></li>
+      <li><a href="#">FAQ</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="#">📞 +91 98765 43210</a></li>
+      <li><a href="#">✉️ hello@prawnexpress.in</a></li>
+      <li><a href="#">📍 Mandapeta, AP</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 PrawnExpress. All rights reserved.</span>
+  <span>FSSAI Lic: 12345678901234 | Privacy Policy | Terms</span>
+</div>
+
+<div class="toast" id="toast">🦐 Added to your order!</div>
+
+<script>
+const products = [
+  { name:'Tiger Prawns', type:'raw', desc:'Large, meaty prawns with firm texture. Perfect for grilling, curries & BBQ.', price:'₹499', unit:'/500g', badge:'Best Seller', emoji:'🦐' },
+  { name:'Jumbo Prawns', type:'raw', desc:'Enormous size, sweet flavour. Great for tandoor, fry or Thai recipes.', price:'₹649', unit:'/500g', badge:'Premium', emoji:'🦐' },
+  { name:'Flower Prawns', type:'cleaned', desc:'Pre-cleaned & deveined. Ready to cook straight from the pack.', price:'₹399', unit:'/500g', badge:'Ready to Cook', emoji:'🦐' },
+  { name:'King Prawns', type:'cooked', desc:'Pre-cooked, peel & eat. Ideal for salads, cocktails & quick meals.', price:'₹799', unit:'/500g', badge:'Pre-cooked', emoji:'🦐' },
+  { name:'Small Prawns', type:'raw', desc:'Classic small prawns. Perfect for prawn rice, masala & biryani.', price:'₹249', unit:'/500g', badge:'Value Pack', emoji:'🦐' },
+  { name:'Mixed Variety Pack', type:'cleaned', desc:'A bit of everything — tiger, flower & jumbo. Great for families.', price:'₹549', unit:'/1kg', badge:'Family Pack', emoji:'🦐' },
+];
+
+function renderMenu(filter='all') {
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = products
+    .filter(p => filter==='all' || p.type===filter)
+    .map(p => `
+      <div class="menu-card">
+        <div class="card-img">
+          <span style="font-size:4.5rem">${p.emoji}</span>
+          <span class="card-badge">${p.badge}</span>
+        </div>
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <div class="card-footer">
+            <div class="price">${p.price}<span> ${p.unit}</span></div>
+            <button class="add-btn" onclick="addToCart('${p.name}')">+</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+}
+
+function filterMenu(btn, type) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMenu(type);
+}
+
+function addToCart(name) {
+  const toast = document.getElementById('toast');
+  toast.textContent = `🦐 ${name} added to order!`;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 2500);
+}
+
+function placeOrder(e) {
+  e.preventDefault();
+  const toast = document.getElementById('toast');
+  toast.textContent = '✅ Order placed! We\'ll call you shortly.';
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 3500);
+}
+
+renderMenu();
+</script>
+</body>
+</html>
